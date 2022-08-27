@@ -40,5 +40,5 @@ func (a *Account) Withdraw(amount float64) error {
 }
 
 func (a *Account) Statement() string {
-	return fmt.Sprintf("%v - %v - %v", a.Number, a.Name, a.Balance)
+	return fmt.Sprintf("%v - %v - %v\n", a.Number, a.Name, a.Balance)
 }
