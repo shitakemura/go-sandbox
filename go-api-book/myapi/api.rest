@@ -1,0 +1,31 @@
+POST http://localhost:8080/article
+
+{
+    "title": "a",
+    "contents": "b",
+    "user_name": "c"
+}
+
+###
+GET http://localhost:8080/article/list
+
+
+###
+GET http://localhost:8080/article/1
+
+###
+POST http://localhost:8080/article/nice
+
+{
+    "title": "nice",
+    "contents": "nice contents",
+    "user_name": "cc"
+}
+
+###
+POST http://localhost:8080/comment
+
+{
+    "article_id": 1,
+    "messege": "first comment"
+}
