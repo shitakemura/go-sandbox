@@ -17,9 +17,10 @@ GET http://localhost:8080/article/1
 POST http://localhost:8080/article/nice
 
 {
-    "title": "nice",
-    "contents": "nice contents",
-    "user_name": "cc"
+    "article_id": 1,
+    "title": "firstPost",
+    "contents": "This is my first blog",
+    "user_name": "saki"
 }
 
 ###
@@ -27,5 +28,5 @@ POST http://localhost:8080/comment
 
 {
     "article_id": 1,
-    "messege": "first comment"
+    "message": "b"
 }
