@@ -1,0 +1,5 @@
+this is hoge
+that is fuga
+foo
+bar
+baz
