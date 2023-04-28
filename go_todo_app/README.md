@@ -7,7 +7,7 @@
 - docker
     - docker compose build --no-cache
     - docker compose up
-    - curl localhost:18000/hoge
+    - curl localhost:18000/health
 
 #### run test
 - go test -v
