@@ -1,0 +1,14 @@
+GET http://localhost:18000/health
+
+###
+GET http://localhost:18000/tasks
+
+###
+POST http://localhost:18000/tasks
+
+< ./handler/testdata/add_task/ok_req.json.golden
+
+###
+POST http://localhost:18000/tasks
+
+< ./handler/testdata/add_task/bad_req.json.golden
