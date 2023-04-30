@@ -7,7 +7,9 @@ import (
 	"example/go_todo_app/testutil"
 	"testing"
 
+	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/google/go-cmp/cmp"
+	"github.com/jmoiron/sqlx"
 )
 
 func prepareTasks(ctx context.Context, t *testing.T, con Execer) entity.Tasks {
@@ -84,5 +86,38 @@ func TestRepository_ListTasks(t *testing.T) {
 
 	if d := cmp.Diff(gots, wants); len(d) != 0 {
 		t.Errorf("differs: (-got +want)\n%s", d)
+	}
+}
+
+func TestRepository_AddTask(t *testing.T) {
+	t.Parallel()
+	ctx := context.Background()
+
+	c := clock.FixedClocker{}
+
+	var wantID int64 = 20
+	okTask := &entity.Task{
+		Title:    "ok task",
+		Status:   "todo",
+		Created:  c.Now(),
+		Modified: c.Now(),
+	}
+
+	db, mock, err := sqlmock.New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() {
+		_ = db.Close()
+	})
+
+	mock.ExpectExec(
+		`INSERT INTO task \(title, status, created, modified\) VALUES \(\?, \?, \?, \?\)`,
+	).WillReturnResult(sqlmock.NewResult(wantID, 1))
+
+	xdb := sqlx.NewDb(db, "mysql")
+	r := &Repository{Clocker: c}
+	if err := r.AddTask(ctx, xdb, okTask); err != nil {
+		t.Errorf("want no error, but got %v", err)
 	}
 }
