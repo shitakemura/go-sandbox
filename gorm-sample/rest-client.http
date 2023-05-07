@@ -1,0 +1,24 @@
+GET http://localhost:8080/books
+
+###
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+    "title": "Start with Why",
+    "author": "Simon Sinek"
+}
+
+###
+GET http://localhost:8080/books/1
+
+###
+PATCH http://localhost:8080/books/1
+Content-Type: application/json
+
+{
+    "title": "The Infinite Game"
+}
+
+###
+DELETE http://localhost:8080/books/1
